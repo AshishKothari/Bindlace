@@ -1,0 +1,13 @@
+# Example: reuse `common-nav.wflow.yaml` then run flow-specific steps.
+wflowSpecVersion: 1
+kind: wflow
+meta:
+  id: user-flow-with-prereq
+  name: User flow with prerequisite
+prerequisites:
+  - path: ./common-nav.wflow.yaml
+log: "Entry flow (runs after prerequisites)"
+steps:
+  - assertVisible: pageRoot
+    step: 2
+    id: after-prereq

@@ -1,0 +1,11 @@
+# Shared steps: open the app root. Other flows can list this file under `prerequisites`.
+wflowSpecVersion: 1
+kind: wflow
+meta:
+  id: common-nav
+  name: Common — navigate to base URL
+log: "Prerequisite: common navigation"
+steps:
+  - navigate: "${data.baseUrl}/"
+    log: "Open base URL"
+    id: nav-root

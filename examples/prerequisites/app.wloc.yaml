@@ -1,0 +1,7 @@
+wflowSpecVersion: 1
+kind: wloc
+meta:
+  id: prereq-example-locators
+locators:
+  pageRoot:
+    css: body

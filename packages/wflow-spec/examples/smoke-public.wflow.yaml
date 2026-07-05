@@ -1,0 +1,8 @@
+# Reliable dual-driver smoke (no third-party bot walls). Use google-search.* for a real SERP demo when running locally.
+wflowSpecVersion: 1
+kind: wflow
+meta:
+  id: smoke-public
+steps:
+  - navigate: "${data.pageUrl}"
+  - assertVisible: mainHeading

@@ -1,0 +1,185 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://bindlace.dev/schema/wflow.schema.json",
+  "title": "wflow",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["wflowSpecVersion", "kind", "steps"],
+  "properties": {
+    "wflowSpecVersion": {
+      "type": "integer",
+      "const": 1
+    },
+    "kind": {
+      "type": "string",
+      "const": "wflow"
+    },
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" }
+      }
+    },
+    "log": {
+      "type": "string",
+      "description": "Optional message written to runner logs when this flow file is loaded (${data...} allowed)"
+    },
+    "prerequisites": {
+      "type": "array",
+      "description": "Other wflow files whose steps run first, in order, before this file's steps. Paths resolve relative to this file's directory (absolute paths allowed).",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path"],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Relative or absolute path to a wflow JSON/YAML file"
+          }
+        }
+      }
+    },
+    "steps": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/definitions/step" }
+    }
+  },
+  "definitions": {
+    "stepAnnotations": {
+      "type": "object",
+      "properties": {
+        "step": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Optional author-defined step number (for logs and reports; not required to be sequential)"
+        },
+        "id": {
+          "type": "string",
+          "description": "Optional author-defined step id (${data...} allowed)"
+        },
+        "log": {
+          "type": "string",
+          "description": "Optional message written to runner logs for this step (${data...} allowed)"
+        }
+      }
+    },
+    "step": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["navigate"],
+          "properties": {
+            "navigate": {
+              "type": "string",
+              "description": "URL or path; may contain ${data...} placeholders"
+            },
+            "assertVisible": {
+              "type": "string",
+              "description": "Optional locator key: after navigation, assert this element is visible (same block as navigate)"
+            },
+            "step": { "$ref": "#/definitions/stepAnnotations/properties/step" },
+            "id": { "$ref": "#/definitions/stepAnnotations/properties/id" },
+            "log": { "$ref": "#/definitions/stepAnnotations/properties/log" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["click"],
+          "properties": {
+            "click": {
+              "type": "string",
+              "description": "Logical locator key from wloc"
+            },
+            "step": { "$ref": "#/definitions/stepAnnotations/properties/step" },
+            "id": { "$ref": "#/definitions/stepAnnotations/properties/id" },
+            "log": { "$ref": "#/definitions/stepAnnotations/properties/log" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["fill"],
+          "properties": {
+            "fill": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["target", "value"],
+              "properties": {
+                "target": {
+                  "type": "string",
+                  "description": "Logical locator key from wloc"
+                },
+                "value": {
+                  "type": "string",
+                  "description": "Literal or ${data...} placeholder"
+                }
+              }
+            },
+            "step": { "$ref": "#/definitions/stepAnnotations/properties/step" },
+            "id": { "$ref": "#/definitions/stepAnnotations/properties/id" },
+            "log": { "$ref": "#/definitions/stepAnnotations/properties/log" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["assertVisible"],
+          "properties": {
+            "assertVisible": {
+              "type": "string",
+              "description": "Logical locator key from wloc (standalone assert step; use navigate.assertVisible to combine with open URL)"
+            },
+            "step": { "$ref": "#/definitions/stepAnnotations/properties/step" },
+            "id": { "$ref": "#/definitions/stepAnnotations/properties/id" },
+            "log": { "$ref": "#/definitions/stepAnnotations/properties/log" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["expectText"],
+          "properties": {
+            "expectText": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["target", "text"],
+              "properties": {
+                "target": { "type": "string" },
+                "text": { "type": "string" }
+              }
+            },
+            "step": { "$ref": "#/definitions/stepAnnotations/properties/step" },
+            "id": { "$ref": "#/definitions/stepAnnotations/properties/id" },
+            "log": { "$ref": "#/definitions/stepAnnotations/properties/log" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["waitFor"],
+          "properties": {
+            "waitFor": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["target"],
+              "properties": {
+                "target": { "type": "string" },
+                "timeoutMs": { "type": "integer", "minimum": 0 }
+              }
+            },
+            "step": { "$ref": "#/definitions/stepAnnotations/properties/step" },
+            "id": { "$ref": "#/definitions/stepAnnotations/properties/id" },
+            "log": { "$ref": "#/definitions/stepAnnotations/properties/log" }
+          }
+        }
+      ]
+    }
+  }
+}

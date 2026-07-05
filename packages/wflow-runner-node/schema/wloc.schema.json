@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://bindlace.dev/schema/wloc.schema.json",
+  "title": "wloc",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["wflowSpecVersion", "kind", "locators"],
+  "properties": {
+    "wflowSpecVersion": {
+      "type": "integer",
+      "const": 1
+    },
+    "kind": {
+      "type": "string",
+      "const": "wloc"
+    },
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" }
+      }
+    },
+    "log": {
+      "type": "string",
+      "description": "Optional message written to runner logs when this locator file is loaded (${data...} allowed)"
+    },
+    "locators": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "$ref": "#/definitions/locator" }
+    }
+  },
+  "definitions": {
+    "locator": {
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "properties": {
+        "css": { "type": "string" },
+        "xpath": { "type": "string" },
+        "role": { "type": "string" },
+        "name": { "type": "string" },
+        "text": { "type": "string" }
+      },
+      "description": "At least one of css, xpath, role+name (optional name), or text must be set. Drivers map these to engine APIs."
+    }
+  }
+}
+

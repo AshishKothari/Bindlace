@@ -1,0 +1,19 @@
+# Example flow: references logical locator keys (defined in app.wloc.yaml).
+wflowSpecVersion: 1
+kind: wflow
+meta:
+  id: login-smoke
+  name: Login smoke
+steps:
+  - navigate: "${data.baseUrl}/login"
+  - waitFor:
+      target: emailField
+      timeoutMs: 10000
+  - fill:
+      target: emailField
+      value: "${data.user.email}"
+  - fill:
+      target: passwordField
+      value: "${data.user.password}"
+  - click: submitButton
+  - assertVisible: dashboardRoot

@@ -1,0 +1,5 @@
+# Data for google-search example: full SERP URL avoids flaky homepage autocomplete vs submit click.
+wflowSpecVersion: 1
+kind: wdata
+data:
+  searchUrl: "https://www.google.com/search?q=wflow+automation+test"

@@ -1,0 +1,14 @@
+{
+  "name": "bindlace",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Bindlace monorepo root. Actual runners live in packages/ (see packages/wflow-runner-node and packages/wflow-spec).",
+  "license": "Apache-2.0",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm --workspace packages/wflow-runner-node run build",
+    "validate:examples": "npm --workspace packages/wflow-runner-node exec -- bindlace validate --flow ../wflow-spec/examples/login.wflow.yaml --locators ../wflow-spec/examples/app.wloc.yaml --data ../wflow-spec/examples/env.wdata.yaml"
+  }
+}

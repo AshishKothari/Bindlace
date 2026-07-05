@@ -1,0 +1,18 @@
+# Locator bundle: neutral strategies (css / xpath / role / text).
+wflowSpecVersion: 1
+kind: wloc
+meta:
+  id: sample-app
+  name: Sample app locators
+locators:
+  emailField:
+    css: 'input[name="email"]'
+  passwordField:
+    css: 'input[type="password"]'
+  submitButton:
+    css: "#login-submit"
+  dashboardRoot:
+    css: "[data-testid=dashboard]"
+  loginLink:
+    role: link
+    name: Sign in

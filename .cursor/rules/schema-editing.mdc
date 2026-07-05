@@ -1,0 +1,16 @@
+---
+description: Constraints when editing wflow/wloc/wdata JSON Schemas
+globs: packages/wflow-spec/schema/**
+alwaysApply: false
+---
+
+# Schema editing rules
+
+- Keep `wflowSpecVersion` as `"const": 1` in all three schemas until a breaking change is explicitly decided and documented in `docs/FEATURES.md`.
+- All three schemas share the same structural spine: `wflowSpecVersion`, `kind`, `meta`, and `log`. Changes to any shared property must be mirrored across `wflow.schema.json`, `wloc.schema.json`, and `wdata.schema.json`.
+- Use JSON Schema **draft-07** (`"$schema": "http://json-schema.org/draft-07/schema#"`). Do not upgrade the dialect without also updating the AJV setup in `packages/wflow-runner-node/src/validate.ts`.
+- After any schema change:
+  1. Update the corresponding example files under `packages/wflow-spec/examples/`.
+  2. Run `wflow validate` against all examples to verify they still pass.
+  3. If merge/resolve behavior changed, regenerate golden fixtures in `packages/wflow-spec/examples/resolved-ir/`.
+- Adding a new step op to `wflow.schema.json` requires a matching `oneOf` entry in `definitions.step` **and** updates in the Node runner (`resolve.ts`, `types.ts`, both driver files).

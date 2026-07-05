@@ -1,0 +1,13 @@
+---
+description: Keep tracking docs accurate when features or implementation change
+globs: docs/**
+alwaysApply: false
+---
+
+# Documentation sync rules
+
+- **`FEATURES.md`** — When a feature is completed or started, update its checkbox (`[ ]` / `[~]` / `[x]`) and bump the "Last updated" date at the top.
+- **`IMPLEMENTATION.md`** — Same checkbox and date convention. Do not mark a task `[x]` without verifying the implementation actually exists in source.
+- **`SYSTEM_DESIGN.md`** — If the execution pipeline, module layout, or IR shape changes, update the mermaid diagram and prose to match. Bump "Last updated".
+- When adding a **new step op**, new **CLI flag**, or new **driver**: ensure all three docs are reviewed for stale references.
+- Cross-reference: `CLAUDE.md` at the repo root is the always-on AI context. If a docs change contradicts `CLAUDE.md`, update `CLAUDE.md` too.

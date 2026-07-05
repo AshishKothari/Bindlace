@@ -1,0 +1,17 @@
+---
+description: Rules for wflow/wloc/wdata YAML/JSON example and artifact files
+globs: "**/*.wflow.yaml,**/*.wloc.yaml,**/*.wdata.yaml,**/*.wflow.json,**/*.wloc.json,**/*.wdata.json"
+alwaysApply: false
+---
+
+# Artifact file rules
+
+- Every example file must pass `wflow validate`. After editing, verify with:
+  ```
+  node packages/wflow-runner-node/dist/cli.js validate --flow <file> [--locators <file>] [--data <file>]
+  ```
+- Keep examples **minimal and readable** — they double as documentation for users learning the format.
+- Required root fields: `wflowSpecVersion: 1` and the matching `kind` (`wflow`, `wloc`, or `wdata`).
+- Use **logical locator keys** (e.g. `loginButton`) in `wflow` steps, not raw CSS/XPath. Raw selectors belong in `wloc` files only.
+- Use `${data.<path>}` for parameterized values; never hard-code secrets or environment-specific URLs in example flows.
+- When merge or resolve logic changes, update the golden IR fixture at `packages/wflow-spec/examples/resolved-ir/login-resolved.example.json`.

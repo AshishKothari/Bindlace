@@ -1,0 +1,27 @@
+{
+  "variant": "baseline",
+  "iterations": 2,
+  "okIterations": 2,
+  "failedIterations": 0,
+  "durationMs": {
+    "mean": 0.005349999999999966,
+    "median": 0.005349999999999966,
+    "p95": 0.008544999999997315,
+    "min": 0.0018000000000029104,
+    "max": 0.008899999999997021
+  },
+  "nodeCpuMs": {
+    "mean": 0,
+    "median": 0,
+    "p95": 0
+  },
+  "nodeRssBytes": {
+    "mean": 34410496,
+    "median": 34410496,
+    "p95": 34417868.8
+  },
+  "output": {
+    "jsonlPath": "C:\\D-Data\\Ashish\\git\\jsonautomation\\bench\\out\\2026-04-19T15-08-20-172Z\\baseline.jsonl",
+    "summaryPath": "C:\\D-Data\\Ashish\\git\\jsonautomation\\bench\\out\\2026-04-19T15-08-20-172Z\\baseline-summary.json"
+  }
+}

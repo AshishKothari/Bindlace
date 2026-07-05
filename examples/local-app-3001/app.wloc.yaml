@@ -1,0 +1,17 @@
+# Replace or extend these keys with selectors that match *your* app’s DOM (DevTools → Copy selector).
+# This template stays generic — it does not import code from any particular project.
+wflowSpecVersion: 1
+kind: wloc
+log: "Locator bundle for local smoke (${data.baseUrl})"
+meta:
+  id: my-app-locators
+  name: Locator bundle (edit for your UI)
+locators:
+  # Always present — useful for a minimal smoke without knowing your markup yet.
+  pageRoot:
+    css: body
+  # Examples to copy and rename (uncomment when you have real selectors):
+  # loginButton:
+  #   css: 'button[type="submit"]'
+  # emailField:
+  #   css: 'input[name="email"]'

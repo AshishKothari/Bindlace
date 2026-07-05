@@ -1,0 +1,14 @@
+# Minimal smoke: open the app root and assert the document body is visible.
+# `navigate` + `assertVisible` can live in the same YAML block; optional `step` / `id` help logs and reports.
+wflowSpecVersion: 1
+kind: wflow
+log: "Flow file: smoke (${data.baseUrl})"
+meta:
+  id: smoke-local-root
+  name: Smoke — home page reachable
+steps:
+  - navigate: "${data.baseUrl}/"
+    log: "Home"
+    assertVisible: pageRoot
+    step: 1
+    id: smoke-open-home

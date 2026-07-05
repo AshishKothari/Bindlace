@@ -1,0 +1,37 @@
+{
+  "variant": "bindlace-run-playwright",
+  "iterations": 3,
+  "okIterations": 3,
+  "failedIterations": 0,
+  "durationMs": {
+    "mean": 76696.99173333333,
+    "median": 63356.08510000001,
+    "p95": 101853.85770999998,
+    "min": 60603.50209999999,
+    "max": 106131.38799999998
+  },
+  "nodeCpuMs": {
+    "mean": 15.666666666666666,
+    "median": 16,
+    "p95": 16
+  },
+  "nodeRssBytes": {
+    "mean": 45483349.333333336,
+    "median": 45469696,
+    "p95": 45783040
+  },
+  "externalPeakWorkingSetBytesApproxSum": {
+    "mean": 501036373.3333333,
+    "median": 492199936,
+    "p95": 516080435.2
+  },
+  "externalCpuDeltaSecondsSum": {
+    "mean": 0.8541666666666666,
+    "median": 0,
+    "p95": 2.30625
+  },
+  "output": {
+    "jsonlPath": "C:\\D-Data\\Ashish\\git\\jsonautomation\\bench\\out\\2026-04-19T17-37-41-385Z\\bindlace-run-playwright.jsonl",
+    "summaryPath": "C:\\D-Data\\Ashish\\git\\jsonautomation\\bench\\out\\2026-04-19T17-37-41-385Z\\bindlace-run-playwright-summary.json"
+  }
+}

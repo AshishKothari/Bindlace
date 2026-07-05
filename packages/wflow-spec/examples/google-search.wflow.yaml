@@ -1,0 +1,10 @@
+# Dual-driver demo against Google SERP: `wflow run ...` or `--driver selenium`.
+# Note: Google may show CAPTCHA or block headless automation from some networks; if so, try --headed or a different network.
+wflowSpecVersion: 1
+kind: wflow
+meta:
+  id: google-search-smoke
+  name: Google SERP smoke
+steps:
+  - navigate: "${data.searchUrl}"
+  - assertVisible: resultsMain

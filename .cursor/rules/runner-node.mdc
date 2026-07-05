@@ -1,0 +1,35 @@
+---
+description: Conventions for the Node runner package (TypeScript, ESM, driver boundary)
+globs: packages/wflow-runner-node/src/**
+alwaysApply: false
+---
+
+# Node runner conventions
+
+## Module system
+
+- This package is **ESM-only** (`"type": "module"` in `package.json`). All internal imports must use `.js` extensions (e.g. `import { X } from "./types.js"`).
+
+## Adding a new step op (checklist)
+
+Every new op touches **five** places:
+
+1. **Schema** — `packages/wflow-spec/schema/wflow.schema.json` (new `oneOf` variant in `definitions.step`)
+2. **Types** — `src/types.ts` (new union member in `ResolvedStep`)
+3. **Resolver** — `src/resolve.ts` (emit the new `ResolvedStep` from raw step data)
+4. **Playwright driver** — `src/playwrightDriver.ts`
+5. **Selenium driver** — `src/seleniumDriver.ts`
+
+If any driver cannot support the op, document the gap explicitly rather than silently skipping it.
+
+## Driver boundary
+
+- Shared modules (`resolve.ts`, `substitute.ts`, `flowFlatten.ts`, `load.ts`, `validate.ts`) must **never** import Playwright or Selenium types. Keep driver-specific code inside `playwrightDriver.ts`, `seleniumDriver.ts`, `runFlow.ts`, and `seleniumRunFlow.ts`.
+
+## Error handling
+
+- `RunError` (in `runErrors.ts`) must always carry `stepIndex` and the `ResolvedStep` so log output includes step number and op name. Never throw a bare `Error` from driver code during step execution.
+
+## Build
+
+- Run `npm run build` (which calls `tsc && node scripts/copy-schemas.mjs`) after source changes. The `dist/` and `schema/` directories in the package are build outputs.

@@ -1,0 +1,15 @@
+{
+  "name": "@bindlace/wflow-spec",
+  "version": "0.1.0",
+  "description": "Bindlace: JSON Schemas and examples for wflow, wloc, and wdata artifacts",
+  "license": "Apache-2.0",
+  "files": [
+    "schema",
+    "examples"
+  ],
+  "keywords": [
+    "wflow",
+    "automation",
+    "json-schema"
+  ]
+}

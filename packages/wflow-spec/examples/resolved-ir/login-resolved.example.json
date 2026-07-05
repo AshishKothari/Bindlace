@@ -1,0 +1,43 @@
+{
+  "$comment": "Illustrative resolved IR after merge (placeholders expanded, locators attached). Shape may evolve—runners should pin to a versioned IR schema when introduced.",
+  "wflowSpecVersion": 1,
+  "kind": "resolved",
+  "meta": {
+    "id": "login-smoke",
+    "name": "Login smoke"
+  },
+  "resolvedSteps": [
+    {
+      "op": "navigate",
+      "url": "https://localhost:3000/login"
+    },
+    {
+      "op": "waitFor",
+      "targetKey": "emailField",
+      "locator": { "css": "input[name=\"email\"]" },
+      "timeoutMs": 10000
+    },
+    {
+      "op": "fill",
+      "targetKey": "emailField",
+      "locator": { "css": "input[name=\"email\"]" },
+      "value": "user@example.com"
+    },
+    {
+      "op": "fill",
+      "targetKey": "passwordField",
+      "locator": { "css": "input[type=\"password\"]" },
+      "value": "use-env-in-ci"
+    },
+    {
+      "op": "click",
+      "targetKey": "submitButton",
+      "locator": { "css": "#login-submit" }
+    },
+    {
+      "op": "assertVisible",
+      "targetKey": "dashboardRoot",
+      "locator": { "css": "[data-testid=dashboard]" }
+    }
+  ]
+}

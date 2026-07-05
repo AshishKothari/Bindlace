@@ -1,0 +1,9 @@
+# Owner site smoke: same artifacts with Playwright or `wflow run ... --driver selenium`.
+wflowSpecVersion: 1
+kind: wflow
+meta:
+  id: findmyprompt-smoke
+  name: FindMyPrompt homepage smoke
+steps:
+  - navigate: "${data.baseUrl}"
+  - assertVisible: generatePromptButton

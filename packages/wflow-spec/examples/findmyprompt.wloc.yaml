@@ -1,0 +1,8 @@
+wflowSpecVersion: 1
+kind: wloc
+meta:
+  id: findmyprompt
+locators:
+  # Scoped to <button> so body copy ("Generate prompts optimized…") does not break Playwright strict mode.
+  generatePromptButton:
+    xpath: "//button[contains(normalize-space(.), 'Generate Prompt')]"
